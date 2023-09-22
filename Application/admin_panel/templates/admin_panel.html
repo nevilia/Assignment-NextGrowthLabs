@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+    <!-- Form to Add New Android App -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Add App</button>
+    </form>
+
+    <!-- List of Android Apps -->
+    <h2>Android Apps:</h2>
+    <ul>
+        {% for app in apps %}
+            <li>{{ app.name }} - Points: {{ app.points }}</li>
+            <a href="{% url 'edit_app' app.id %}">Edit</a> |
+            <a href="{% url 'delete_app' app.id %}">Delete</a>
+        {% endfor %}
+    </ul>
+</body>
+</html>
